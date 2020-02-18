@@ -7,7 +7,7 @@ import os
 # Create your views here.
 
 def create_repo(repo_name):
-    os.system("mkdir ~/git/{0}.git&&git init --bare ~/git/{0}.git".format(repo_name))
+    os.system("mkdir /tmp/git/{0}.git&&git init --bare /tmp/git/{0}.git".format(repo_name))
 
 def index(request):
     return render(request,'managesys/index.html',{})
