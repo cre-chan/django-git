@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <h1>リポジトリ{{repo_name}}の設立出来ました！</h1>
+    <div>
+        サーバにリポジトリは既に用意してあります。ローカルレポジトリからリモートを初期化してください。指示どおりにやってください。
+    </div>
+    <div>
+        ターミナルに以下の命令を実行する。
+        <ol>
+            <li>
+                git remote add origin git@name-of-this-host:~/git/{{ repo_name }}.git
+            </li>
+            <li>
+                git push -u origin master
+            </li>
+        </ol>
+    </div>
+    <form action="{% url 'managesys:creation' %}" method="GET">
+        <input type="submit" value="もう一つリポジトリを作る">
+    </form>
+</body>
