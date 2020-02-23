@@ -1,0 +1,25 @@
+# 運用環境を構築
+FROM python:3 AS prod
+
+# django uwsgiをインストール
+RUN pip install django uwsgi
+
+# あらゆる依存をインストール
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+
+# プログラムが作動するには/tmp/gitディレクトリが必要で、匿名ボリュームをつける
+VOLUME /tmp/git/
+
+# containerの8000番ポートで待ち受け
+EXPOSE 8000
+
+# プログラムは/serverディレクトリにインストール
+WORKDIR /server
+COPY . /server
+
+# データベースを遷移し、静的ファイルを収集
+RUN python manage.py migrate \
+     && python manage.py collectstatic
+
+CMD uwsgi uwsgi.ini
